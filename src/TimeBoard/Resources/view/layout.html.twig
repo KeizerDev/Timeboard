@@ -1,3 +1,17 @@
-{% block body %}
-    HI
-{% endblock body %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Login{% endblock title %}</title>
+    <link rel="stylesheet" href="/components/material-design-lite/material.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="/components/material-design-lite/material.min.js"></script>
+</head>
+<body>
+    <div class="mdl-container">
+        {% block body %}
+            HI
+        {% endblock body %}
+    </div>
+</body>
+</html>
