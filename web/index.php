@@ -44,7 +44,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         array('^/login', 'IS_AUTHENTICATED_ANONYMOUSLY'),
         array('^/register', 'IS_AUTHENTICATED_ANONYMOUSLY'),
         array('^/setup', 'IS_AUTHENTICATED_ANONYMOUSLY'),
-        array('^/', 'ROLE_USER'),
+       // array('^/', 'ROLE_USER'),
     )
 ));
 
@@ -59,7 +59,7 @@ $app['UserRepository'] = $app->share(function() use ($app) {
 
 
 $app['BoardController'] = $app->share(function() use ($app) {
-    return new BoardController($app['UserManager']);
+    return new BoardController($app['UserManager'], $app['twig']);
 });
 
 
@@ -75,6 +75,9 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 
 $app->get('/login', 'SecurityController:renderLoginPage');
+$app->get('/', 'BoardController:renderTimeBoardIndex');
+
+
 
 if($app['debug'] == true) {
 
