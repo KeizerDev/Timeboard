@@ -1,0 +1,21 @@
+{
+  "name": "Timeboard",
+  "homepage": "https://github.com/KeizerDev/Timeboard",
+  "authors": [
+    "Robert-Jan Keizer <robertjankeizer@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
