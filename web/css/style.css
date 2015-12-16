@@ -9,3 +9,15 @@ body {
 .mdl-login-container {
     margin: 0 auto;
 }
+
+.mdl-table {
+    width: 100%;
+}
+
+.mdl-float-right {
+    float: right;
+}
+
+.mdl-float-left {
+    float: left;
+}
