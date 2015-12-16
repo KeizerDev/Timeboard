@@ -1,12 +1,16 @@
 <?php
 
+use TimeBoard\Controller\BoardController;
+use TimeBoard\Controller\SecurityController;
 use TimeBoard\Manager\UserManager;
 use TimeBoard\Repository\UserRepository;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
 $app = new Silex\Application();
+$app['debug'] = true;
 
+$app->register(new Silex\Provider\ServiceControllerServiceProvider());
 
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
@@ -39,6 +43,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.access_rules' => array(
         array('^/login', 'IS_AUTHENTICATED_ANONYMOUSLY'),
         array('^/register', 'IS_AUTHENTICATED_ANONYMOUSLY'),
+        array('^/setup', 'IS_AUTHENTICATED_ANONYMOUSLY'),
         array('^/', 'ROLE_USER'),
     )
 ));
@@ -53,8 +58,30 @@ $app['UserRepository'] = $app->share(function() use ($app) {
 });
 
 
-$app->get('/hello', function () {
-    return 'Hello!';
+$app['BoardController'] = $app->share(function() use ($app) {
+    return new BoardController($app['UserManager']);
 });
+
+$app['SecurityController'] = $app->share(function() use ($app) {
+    return new SecurityController($app['twig']);
+});
+
+/* twig service provider */
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/../src/TimeBoard/Resources/view',
+));
+
+
+
+$app->get('/login', 'SecurityController:renderLoginPage');
+
+if($app['debug'] == true) {
+
+    $app['Fixtures'] = $app->share(function() use ($app) {
+        return new \TimeBoard\Fixtures($app['UserRepository']);
+    });
+
+    $app->get('/setup', 'Fixtures:createStructure');
+}
 
 $app->run();
