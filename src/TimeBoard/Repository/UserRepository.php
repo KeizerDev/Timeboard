@@ -28,4 +28,11 @@ class UserRepository
     }
 
 
+
+    public function getUserByUsername($username)
+    {
+     //todo add this
+    }
+
+
 }
