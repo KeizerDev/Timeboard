@@ -52,8 +52,7 @@ $app['UserRepository'] = $app->share(function() use ($app) {
     return new UserRepository($app['db']);
 });
 
-
-$app->get('/hello', function () {
+$app->get('/login', function () {
     return 'Hello!';
 });
 
