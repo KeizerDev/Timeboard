@@ -27,7 +27,10 @@ class Fixtures
      */
     public function createStructure()
     {
+        $this->userRepository->createStructure();
         return new Response("DONE");
     }
+
+
 
 }
