@@ -24,8 +24,14 @@ class UserRepository
         password VARCHAR(255) DEFAULT NULL,
         salt VARCHAR(255) NOT NULL DEFAULT '',
         roles VARCHAR(255) NOT NULL DEFAULT '',
-        time_created INT NOT NULL DEFAULT 0,
-        );");
+        time_created INT NOT NULL DEFAULT 0)");
+    }
+
+
+
+    public function getUserByUsername($username)
+    {
+     //todo add this
     }
 
 
