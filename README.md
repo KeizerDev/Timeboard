@@ -13,22 +13,24 @@ Hou het allemaal zeer eenvoudig; besteed er niet meer dan  de absoluut noodzakel
  
 Website met database
 
-·         Inloggen voor de rol leerling en docent
+- [ ] Inloggen voor de rol leerling en docent
 
-·         Urenverantwoording: periode, datum, aantal minuten, activiteit, betrokken lesvak, opmerking
+- [ ] Urenverantwoording: periode, datum, aantal minuten, activiteit, betrokken lesvak, opmerking
 
-·         Planning komende week: periode, activiteit en lesvak plus status
+- [ ] Planning komende week: periode, activiteit en lesvak plus status
 
-·         Koppeling planning en verantwoording op activiteit
+- [ ] Koppeling planning en verantwoording op activiteit
 
-·         Lesvakken: zowel 1e als 2e jaar alle vakken plus evt eisen en deadline en aftekenen (door leerling)
+- [ ] Lesvakken: zowel 1e als 2e jaar alle vakken plus evt eisen en deadline en aftekenen (door leerling)
 
- 
+- [ ] Inlogscherm
 
-·         Inlogscherm
+- [ ] Invoerschermen brontabellen
 
-·         Invoerschermen brontabellen
+- [ ] Invoerformulieren
 
-·         Invoerformulieren
+- [ ] Exportmogelijkheid vanuit de interface (ten dienste van docent)
 
-·         Exportmogelijkheid vanuit de interface (ten dienste van docent)
+```
+php -S 0:8080 -t web/
+```

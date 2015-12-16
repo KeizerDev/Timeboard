@@ -62,6 +62,7 @@ $app['BoardController'] = $app->share(function() use ($app) {
     return new BoardController($app['UserManager']);
 });
 
+
 $app['SecurityController'] = $app->share(function() use ($app) {
     return new SecurityController($app['twig']);
 });
