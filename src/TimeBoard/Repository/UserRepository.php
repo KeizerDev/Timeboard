@@ -2,7 +2,7 @@
 namespace TimeBoard\Repository;
 
 use Doctrine\DBAL\Connection;
-use Symfony\Component\Security\Core\User\User;
+use TimeBoard\Model\User;
 
 class UserRepository
 {
@@ -70,7 +70,14 @@ class UserRepository
 
     private function hydrateUser($data)
     {
-        $user = new User();
+        $user = new User($data['username']);
+        $user->setId($data['id']);
+        $user->setPassword($data['password']);
+        if ($roles = explode(',', $data['roles'])) {
+            $user->setRoles($roles);
+        }
+        $user->setSalt($data['salt']);
+        $user->setTimeCreated($data['time_created']);
 
     }
 
