@@ -2,13 +2,14 @@
 namespace TimeBoard\Repository;
 
 use Doctrine\DBAL\Connection;
+use Symfony\Component\Security\Core\User\User;
 
 class UserRepository
 {
     /**
      * @var Connection
      */
-    private $connection;
+    private $conn;
 
     public function __construct(Connection $connection)
     {
@@ -18,7 +19,7 @@ class UserRepository
 
     public function createStructure()
     {
-        $this->connection->executeQuery("CREATE TABLE IF NOT EXISTS users (
+        $this->conn->executeQuery("CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY,
         username VARCHAR(100) UNIQUE,
         password VARCHAR(255) DEFAULT NULL,
@@ -28,10 +29,49 @@ class UserRepository
     }
 
 
+    /**
+     * gets a user by its identifier
+     *
+     * @param $id
+     * @return null|User
+     */
+    public function getUserByIdentifier($id)
+    {
+        $sql = "SELECT * FROM users WHERE id=:id LIMIT 0,1";
+        $params = [
+            'id' => $id
+        ];
+        $data = $this->conn->fetchAll($sql, $params);
+        if($data) {
+            $user = $this->hydrateUser($data[0]);
+            return $user;
+        }
+        return null;
+    }
+    /**
+     * get a user by its username
+     *
+     * @param $username
+     * @return null|User
+     */
     public function getUserByUsername($username)
     {
-     //todo add this
+        $sql = "SELECT * FROM users WHERE username=:username LIMIT 0,1";
+        $params = [
+            'username' => $username
+        ];
+        $data = $this->conn->fetchAll($sql, $params);
+        if($data) {
+            $user = $this->hydrateUser($data[0]);
+            return $user;
+        }
+        return null;
     }
 
+    private function hydrateUser($data)
+    {
+        $user = new User();
+
+    }
 
 }

@@ -38,9 +38,4 @@ class BoardController {
     }
 
 
-
-
-
-
-
 }

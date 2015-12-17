@@ -44,7 +44,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         array('^/login', 'IS_AUTHENTICATED_ANONYMOUSLY'),
         array('^/register', 'IS_AUTHENTICATED_ANONYMOUSLY'),
         array('^/setup', 'IS_AUTHENTICATED_ANONYMOUSLY'),
-       // array('^/', 'ROLE_USER'),
+        //array('^/', 'ROLE_USER'),
     )
 ));
 
