@@ -79,6 +79,40 @@ class UserRepository
         $user->setSalt($data['salt']);
         $user->setTimeCreated($data['time_created']);
 
+        return $user;
+    }
+
+
+    /**
+     * Insert a new User instance into the database.
+     *
+     * @param User $user
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function insertNewUser(User $user)
+    {
+        $sql = 'INSERT INTO users
+            (username
+            , password
+            , salt
+            , roles
+            , time_created )
+            VALUES
+            (:username
+            , :password
+            , :salt
+            , :roles
+            , :timeCreated)';
+
+        $params = array(
+            'password' => $user->getPassword(),
+            'salt' => $user->getSalt(),
+            'roles' => implode(',', $user->getRoles()),
+            'timeCreated' => $user->getTimeCreated(),
+            'username' => $user->getUsername(),
+        );
+        $this->conn->executeUpdate($sql, $params);
+        $user->setId($this->conn->lastInsertId());
     }
 
 }

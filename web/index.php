@@ -50,7 +50,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 
 
 $app['UserManager'] = $app->share(function() use ($app) {
-    return new UserManager($app['UserRepository']);
+    return new UserManager($app['UserRepository'], $app);
 });
 
 $app['UserRepository'] = $app->share(function() use ($app) {
