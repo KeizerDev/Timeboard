@@ -13,21 +13,21 @@ Hou het allemaal zeer eenvoudig; besteed er niet meer dan  de absoluut noodzakel
  
 Website met database
 
-- [ ] Inloggen voor de rol leerling en docent
+- [x] Inloggen voor de rol leerling en docent
 
-- [ ] Urenverantwoording: periode, datum, aantal minuten, activiteit, betrokken lesvak, opmerking
+- [x] Urenverantwoording: periode, datum, aantal minuten, activiteit, betrokken lesvak, opmerking
 
-- [ ] Planning komende week: periode, activiteit en lesvak plus status
+- [x] Planning komende week: periode, activiteit en lesvak plus status
 
 - [ ] Koppeling planning en verantwoording op activiteit
 
 - [ ] Lesvakken: zowel 1e als 2e jaar alle vakken plus evt eisen en deadline en aftekenen (door leerling)
 
-- [ ] Inlogscherm
+- [x] Inlogscherm
 
-- [ ] Invoerschermen brontabellen
+- [x] Invoerschermen brontabellen
 
-- [ ] Invoerformulieren
+- [x] Invoerformulieren
 
 - [ ] Exportmogelijkheid vanuit de interface (ten dienste van docent)
 
