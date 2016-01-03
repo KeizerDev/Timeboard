@@ -76,6 +76,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 $app->get('/login', 'SecurityController:renderLoginPage');
 $app->get('/', 'BoardController:renderTimeBoardIndex');
+$app->get('/{id}/edit', 'BoardController:renderTimeBoardEdit');
 
 
 
