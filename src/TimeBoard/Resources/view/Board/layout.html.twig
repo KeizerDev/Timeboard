@@ -23,10 +23,10 @@
         <table class="mdl-table mdl-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
             <thead>
                 <tr>
-                    <th class="mdl-data-table__cell--non-numeric">Periode</th>
+                    <th class="mdl-data-table__cell--non-numeric">Lesuur</th>
+                    <th>Lesvak</th>
                     <th>Aantal minuten</th>
                     <th>Activiteit</th>
-                    <th>Betrokken lesvak</th>
                     <th>Opmerking</th>
                 </tr>
             </thead>
@@ -34,6 +34,8 @@
                 {% block tablebody %}{% endblock tablebody %}
             </tbody>
         </table>
+        {% block buttonholder %}
+        {% endblock buttonholder %}
     </div>
 </div>
 {% endblock body %}
