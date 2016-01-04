@@ -1,2 +1,39 @@
+{% extends 'layout.html.twig' %}
+
 {% block body %}
+    <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+        <div class="mdl-card mdl-table mdl-shadow--2dp">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">{{date}}</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                {% block description %}{% endblock description %}
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-float-left">Vorige dag</a>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-float-right">Volgende dag</a>
+            </div>
+            <div class="mdl-card__menu">
+                {% block cardmenu %}{% endblock cardmenu %}
+            </div>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+        <table class="mdl-table mdl-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Periode</th>
+                    <th>Aantal minuten</th>
+                    <th>Activiteit</th>
+                    <th>Betrokken lesvak</th>
+                    <th>Opmerking</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% block tablebody %}{% endblock tablebody %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock body %}

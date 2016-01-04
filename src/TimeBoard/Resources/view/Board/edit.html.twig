@@ -1,60 +1,47 @@
-{% extends 'layout.html.twig' %}
+{% extends 'Board/layout.html.twig' %}
 
 {% block title %}Dashboard{% endblock %}
 
-{% block body %}
-<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-        <div class="mdl-card mdl-table mdl-shadow--2dp">
-            <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">{{date}}</h2>
-            </div>
-            <div class="mdl-card__supporting-text">
-                <div class="mdl-textfield mdl-js-textfield mdl-table">
-                    <textarea class="mdl-textfield__input" type="text"></textarea>
-                    <label class="mdl-textfield__label" for="sample5">Dag description</label>
-                </div>
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-float-left">Vorige dag</a>
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-float-right">Volgende dag</a>
-            </div>
+{% block description %}
+    <div class="mdl-textfield mdl-js-textfield mdl-table">
+        <textarea class="mdl-textfield__input" type="text"></textarea>
+        <label class="mdl-textfield__label" for="sample5">Dag description</label>
+    </div>
+{% endblock description %}
+
+{% block tablebody %}
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
+        </td>
+        <td>
+            <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
+        </td>
+        <td>
+            <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
+        </td>
+        <td>
+            <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
+        </td>
+        <td>
+            <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
+        </td>
+    </tr>
+{% endblock tablebody %}
+
+{% block buttonholder %}
+    <div class="mdl-card mdl-shadow--2dp mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--12-col-phone mdl-button-holder">
+        <div class="mdl-card__actions mdl-card--border">
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-float-left add-field">
+                <i class="material-icons">add</i>
+            </button>
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-float-right remove-field">
+                <i class="material-icons">done</i>
+            </button>
         </div>
     </div>
-    <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-        <table class="mdl-table mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-            <thead>
-                <tr>
-                    <th class="mdl-data-table__cell--non-numeric">Periode</th>
-                    <th>Aantal minuten</th>
-                    <th>Activiteit</th>
-                    <th>Betrokken lesvak</th>
-                    <th>Opmerking</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="mdl-data-table__cell--non-numeric">
-                        <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
-                    </td>
-                    <td>
-                        <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
-                    </td>
-                    <td>
-                        <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
-                    </td>
-                    <td>
-                        <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
-                    </td>
-                    <td>
-                        <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-{% endblock body %}
+{% endblock buttonholder %}
+
 {#
     periode, datum, aantal minuten, activiteit, betrokken lesvak, opmerking
  #}
