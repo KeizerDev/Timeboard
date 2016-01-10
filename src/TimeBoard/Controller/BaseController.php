@@ -27,7 +27,7 @@ class BaseController
 
     public function renderMainPage()
     {
-        return $this->twig->render('Main/index.html.twig');
+        return $this->twig->render('Main/index.html.twig', array('date' => date('d-m-Y'), ));
     }
 
 }

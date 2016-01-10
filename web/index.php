@@ -81,8 +81,8 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 $app->get('/login', 'SecurityController:renderLoginPage');
 $app->get('/', 'BaseController:renderMainPage');
-$app->get('/verantwoording/{id}', 'BoardController:renderTimeBoardIndex');
-$app->get('/verantwoording/{id}/edit', 'BoardController:renderTimeBoardEdit');
+$app->get('/verantwoording/{dateId}', 'BoardController:renderTimeBoardIndex');
+$app->get('/verantwoording/{dateId}/edit', 'BoardController:renderTimeBoardEdit');
 
 if($app['debug'] == true) {
 

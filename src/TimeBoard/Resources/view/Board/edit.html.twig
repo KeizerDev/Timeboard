@@ -9,18 +9,22 @@
     </div>
 {% endblock description %}
 
+{% block editroute %}/edit{% endblock editroute %}
+
 {% block tablebody %}
     <tr>
+        <td>
+            <div class="mdl-selectfield">
+                <label>Standard Select</label>
+                <select class="browser-default">
+                    <option value="" disabled selected>Kies je vak</option>
+                    {% for vak in vakken %}
+                    <option value="{{vak.id}}">{{vak.vak}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </td>
         <td class="mdl-data-table__cell--non-numeric">
-            <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
-        </td>
-        <td>
-            <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
-        </td>
-        <td>
-            <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
-        </td>
-        <td>
             <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
         </td>
         <td>
