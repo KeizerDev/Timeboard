@@ -32,7 +32,7 @@ class BoardController {
         $this->twig = $twig;
     }
 
-    public function renderTimeBoardIndex() 
+    public function renderTimeBoardIndex()
     {
         return $this->twig->render('Board/index.html.twig');
     }

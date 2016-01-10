@@ -44,7 +44,8 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         array('^/login', 'IS_AUTHENTICATED_ANONYMOUSLY'),
         array('^/register', 'IS_AUTHENTICATED_ANONYMOUSLY'),
         array('^/setup', 'IS_AUTHENTICATED_ANONYMOUSLY'),
-        //array('^/', 'ROLE_USER'),
+        array('^/', 'ROLE_USER'),
+        array('^/verantwoording', 'ROLE_USER'),
     )
 ));
 
@@ -74,9 +75,11 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 
 
-$app->get('/login', 'SecurityController:renderLoginPage');
 $app->get('/', 'BoardController:renderTimeBoardIndex');
-$app->get('/{id}/edit', 'BoardController:renderTimeBoardEdit');
+$app->get('/login', 'SecurityController:renderLoginPage');
+
+$app->get('/verantwoording/{id}', 'BoardController:renderTimeBoardIndex');
+$app->get('/verantwoording/{id}/edit', 'BoardController:renderTimeBoardEdit');
 
 
 
