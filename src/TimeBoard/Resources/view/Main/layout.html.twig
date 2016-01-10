@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+        <div class="mdl-card mdl-table mdl-shadow--2dp">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Timeboard</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                {% block description %}{% endblock description %}
+            </div>
+            <div class="mdl-card__menu">
+                {% block blocktitle %}{% endblock blocktitle %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

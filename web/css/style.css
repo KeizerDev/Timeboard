@@ -21,3 +21,12 @@ body {
 .mdl-float-left {
     float: left;
 }
+
+.mdl-button-holder {
+    min-height: 0;
+    margin: 30px auto;
+}
+
+.elementtobeadd {
+    display: none;
+}

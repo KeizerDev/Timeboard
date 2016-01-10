@@ -32,16 +32,17 @@ class BoardController {
         $this->twig = $twig;
     }
 
-    public function renderTimeBoardIndex()
+
+    public function renderTimeBoardIndex($dateId)
     {
-        return $this->twig->render('Board/index.html.twig');
+        $date = new DateTime($dateId);
+        return $this->twig->render('Board/index.html.twig', array('date' => $date->format('Y-m-d'), ));
     }
 
-    public function renderTimeBoardEdit($id) 
+    public function renderTimeBoardEdit($dateId)
     {
-        // do db query get date or something 
-        return $this->twig->render('Board/edit.html.twig', array('date' => $id, ));
+        $date = new DateTime($dateId);
+        // do db query get date or something
+        return $this->twig->render('Board/edit.html.twig', array('date' => $date->format('Y-m-d'), ));
     }
-
-
 }

@@ -1,5 +1,6 @@
 <?php
 
+use TimeBoard\Controller\BaseController;
 use TimeBoard\Controller\BoardController;
 use TimeBoard\Controller\SecurityController;
 use TimeBoard\Manager\UserManager;
@@ -44,8 +45,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         array('^/login', 'IS_AUTHENTICATED_ANONYMOUSLY'),
         array('^/register', 'IS_AUTHENTICATED_ANONYMOUSLY'),
         array('^/setup', 'IS_AUTHENTICATED_ANONYMOUSLY'),
-        array('^/', 'ROLE_USER'),
-        array('^/verantwoording', 'ROLE_USER'),
+        // array('^/', 'ROLE_USER'),
     )
 ));
 
@@ -58,6 +58,9 @@ $app['UserRepository'] = $app->share(function() use ($app) {
     return new UserRepository($app['db']);
 });
 
+$app['BaseController'] = $app->share(function() use ($app) {
+    return new BaseController($app['twig']);
+});
 
 $app['BoardController'] = $app->share(function() use ($app) {
     return new BoardController($app['UserManager'], $app['twig']);
@@ -68,6 +71,7 @@ $app['SecurityController'] = $app->share(function() use ($app) {
     return new SecurityController($app['twig']);
 });
 
+
 /* twig service provider */
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../src/TimeBoard/Resources/view',
@@ -75,13 +79,10 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 
 
-$app->get('/', 'BoardController:renderTimeBoardIndex');
 $app->get('/login', 'SecurityController:renderLoginPage');
-
+$app->get('/', 'BaseController:renderMainPage');
 $app->get('/verantwoording/{id}', 'BoardController:renderTimeBoardIndex');
 $app->get('/verantwoording/{id}/edit', 'BoardController:renderTimeBoardEdit');
-
-
 
 if($app['debug'] == true) {
 

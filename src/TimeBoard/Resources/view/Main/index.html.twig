@@ -1,0 +1,19 @@
+{% extends 'Main/layout.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block blocktitle %}<a class="mdl-button mdl-js-button mdl-js-ripple-effect" href="/logout"><b>Robert-Jan</b></a>{% endblock blocktitle %}
+
+{% block description %}
+
+<ul>
+    <li><a href="/planning" class="mdl-button mdl-js-button mdl-js-ripple-effect">Planning</a></li>
+    <li><a href="/verantwoording" class="mdl-button mdl-js-button mdl-js-ripple-effect">Uren verantwoording</a></li>
+    <li><a href="/export" class="mdl-button mdl-js-button mdl-js-ripple-effect">Export mogelijkheden</a></li>
+</ul>
+{% endblock description %}
+
+
+{#
+    periode, datum, aantal minuten, activiteit, betrokken lesvak, opmerking
+ #}
