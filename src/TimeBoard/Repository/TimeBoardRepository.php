@@ -3,7 +3,9 @@ namespace TimeBoard\Repository;
 
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Validator\Constraints\Date;
+use TimeBoard\Manager\UserManager;
 use TimeBoard\Model\Course;
+use TimeBoard\Model\TimeBoard;
 use TimeBoard\Model\User;
 
 class TimeBoardRepository
@@ -12,10 +14,20 @@ class TimeBoardRepository
      * @var Connection
      */
     private $conn;
+    /**
+     * @var UserManager
+     */
+    private $userManager;
 
-    public function __construct(Connection $connection)
+    /**
+     * TimeBoardRepository constructor.
+     * @param Connection $connection
+     * @param UserManager $userManager
+     */
+    public function __construct(Connection $connection, UserManager $userManager)
     {
         $this->conn = $connection;
+        $this->userManager = $userManager;
     }
 
 
@@ -48,6 +60,8 @@ class TimeBoardRepository
             foreach($data as $courseData) {
                $courseArray[] = $this->hydrateCourse($courseData);
             }
+
+            return $courseArray;
         }
 
         return null;
@@ -62,7 +76,7 @@ class TimeBoardRepository
             'id' => $id
         ];
 
-        $data = $this->conn->fetchArray($sql, $params);
+        $data = $this->conn->fetchAssoc($sql, $params);
 
         if($data) {
             return $this->hydrateCourse($data);
@@ -86,21 +100,25 @@ class TimeBoardRepository
      * get the timeboard by date object
      *
      * @param $dateOfBoard
-     * @return null|Date
+     * @return null|TimeBoard[]
      */
-    public function getTimeboardOfDate($dateOfBoard)
+    public function getTimeBoardOfDate(\DateTime $dateOfBoard)
     {
-        //WHAT THE FUCK IS THIS!!!! INLINE FUCKING QUERYS!!! NO DATABINDING?????? NOOOB RJ!!
         $sql = "SELECT * FROM accountability WHERE datum=:datum";
 
         $params = [
-          "datum" => $dateOfBoard
+          "datum" => $dateOfBoard->getTimestamp() * 1000
         ];
 
         $data = $this->conn->fetchAll($sql, $params);
 
         if($data) {
-            return $data;
+            $timeBoardData = [];
+            foreach($data as $timeBoard) {
+                $timeBoardData[] = $this->hydrateTimeBoard($timeBoard);
+            }
+
+            return $timeBoardData;
         }
         return null;
     }
@@ -108,10 +126,20 @@ class TimeBoardRepository
 
     /**
      * @param array $timeBoardData
+     * @return TimeBoard
      */
     private function hydrateTimeBoard(array $timeBoardData)
     {
+        $timeBoard = new TimeBoard();
 
+        $timeBoard->setId($timeBoardData['id']);
+        $timeBoard->setUser($this->userManager->getUserRepository()->getUserByIdentifier($timeBoardData['user_id']));
+        $timeBoard->setCourse($this->getCourseByIdentifier($timeBoardData['vak']));
+        $timeBoard->setMinutes($timeBoardData['minuten']);
+        $timeBoard->setNote($timeBoardData['notitie']);
+        $timeBoard->setDate($timeBoardData['datum']);
+
+        return $timeBoard;
     }
 
 }

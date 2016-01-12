@@ -15,14 +15,15 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     <a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" href="/verantwoording/{{date.date_today}}/edit">
         <i class="material-icons">edit</i>
     </a>
+
 {% endblock cardmenu %}
 
 {% block tablebody %}
     {% for item in accountability %}
     <tr>
-        <td>vak id: {{item.vak}}</td>
-        <td class="mdl-data-table__cell--non-numeric">{{item.minuten}}</td>
-        <td>{{item.notitie}}</td>
+        <td>{{item.getCourse().getCourseName()}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{item.getMinutes()}}</td>
+        <td>{{item.getNote()}}</td>
     </tr>
     {% endfor %}
 {% endblock tablebody %}

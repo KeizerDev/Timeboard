@@ -42,9 +42,10 @@ class UserRepository
         $params = [
             'id' => $id
         ];
-        $data = $this->conn->fetchAll($sql, $params);
+        $data = $this->conn->fetchAssoc($sql, $params);
+
         if($data) {
-            $user = $this->hydrateUser($data[0]);
+            $user = $this->hydrateUser($data);
             return $user;
         }
         return null;

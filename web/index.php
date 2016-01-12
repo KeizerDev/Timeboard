@@ -67,7 +67,7 @@ $app['UserRepository'] = $app->share(function() use ($app) {
 });
 
 $app['TimeBoardRepository'] = $app->share(function() use ($app) {
-    return new TimeBoardRepository($app['db']);
+    return new TimeBoardRepository($app['db'], $app['UserManager']);
 });
 
 $app['BaseController'] = $app->share(function() use ($app) {
