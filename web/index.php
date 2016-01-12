@@ -2,6 +2,7 @@
 
 use TimeBoard\Controller\BaseController;
 use TimeBoard\Controller\BoardController;
+use TimeBoard\Controller\PlanningController;
 use TimeBoard\Controller\SecurityController;
 use TimeBoard\Fixtures;
 use TimeBoard\Manager\TimeBoardManager;
@@ -79,6 +80,9 @@ $app['BoardController'] = $app->share(function() use ($app) {
     return new BoardController($app['UserManager'], $app['TimeBoardManager'], $app['twig']);
 });
 
+$app['PlanningController'] = $app->share(function() use ($app) {
+    return new PlanningController($app['UserManager'], $app['TimeBoardManager'], $app['twig']);
+});
 
 $app['SecurityController'] = $app->share(function() use ($app) {
     return new SecurityController($app['twig'], $app['UserManager']);
@@ -93,6 +97,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 $app->get('/', 'BaseController:renderMainPage');
 $app->get('/login', 'SecurityController:renderLoginPage');
+$app->get('/planning/{dateId}', 'PlanningController:renderPlanning')->bind('');
 $app->get('/verantwoording/{dateId}', 'BoardController:renderTimeBoardIndex')->bind('');
 $app->get('/verantwoording/{dateId}/edit', 'BoardController:renderTimeBoardEdit');
 $app->get('/verantwoording/{dateId}/new', 'BoardController:renderTimeBoardNew')->bind('newTimeBoard');

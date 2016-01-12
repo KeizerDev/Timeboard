@@ -10,7 +10,7 @@
 {% block tablebody %}
     {% for item in accountability %}
         <tr>
-            <td>
+            <td class="mdl-data-table__cell--non-numeric">
                 <div class="mdl-selectfield">
                     <input value="1" name="existing" type="hidden">
                     <label>Standard Select</label>
@@ -23,16 +23,16 @@
                     </select>
                 </div>
             </td>
-            <td class="mdl-data-table__cell--non-numeric">
+            <td>
                 <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" value="{{ item.getMinutes() }}" type="text" id="pass">
             </td>
-            <td>
+            <td class="mdl-data-table__cell--non-numeric">
                 <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" value="{{ item.getNote() }}" id="pass">
             </td>
         </tr>
     {% endfor %}
     <tr>
-        <td>
+        <td class="mdl-data-table__cell--non-numeric">
             <div class="mdl-selectfield">
                 <label>Standard Select</label>
                 <select class="browser-default">
@@ -43,10 +43,10 @@
                 </select>
             </div>
         </td>
-        <td class="mdl-data-table__cell--non-numeric">
+        <td>
             <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
         </td>
-        <td>
+        <td class="mdl-data-table__cell--non-numeric">
             <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" id="pass">
         </td>
     </tr>

@@ -14,9 +14,9 @@
 {% block tablebody %}
     {% for item in accountability %}
     <tr>
-        <td>{{item.getCourse().getCourseName()}}</td>
-        <td class="mdl-data-table__cell--non-numeric">{{item.getMinutes()}}</td>
-        <td>{{item.getNote()}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{item.getCourse().getCourseName()}}</td>
+        <td>{{item.getMinutes()}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{item.getNote()}}</td>
     </tr>
     {% endfor %}
 {% endblock tablebody %}
