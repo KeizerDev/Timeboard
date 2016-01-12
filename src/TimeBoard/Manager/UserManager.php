@@ -4,6 +4,7 @@ namespace TimeBoard\Manager;
 
 use Silex\Application;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -11,7 +12,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use TimeBoard\Model\User;
 use TimeBoard\Repository\UserRepository;
 
-class UserManager implements UserProviderInterface {
+class UserManager implements UserProviderInterface
+{
 
 
     /**
@@ -80,6 +82,19 @@ class UserManager implements UserProviderInterface {
         return $this->getUser($user->getId());
     }
 
+
+    /**
+     * Get a User instance by its ID.
+     *
+     * @param int $id
+     * @return User|null The User, or null if there is no User with that ID.
+     */
+    public function getUser($id)
+    {
+        return $this->getUserRepository()->getUserByIdentifier($id);
+    }
+
+
     /**
      * Whether this provider supports the given user class.
      *
@@ -119,6 +134,18 @@ class UserManager implements UserProviderInterface {
     {
         $encoder = $this->getEncoder($user);
         return $encoder->encodePassword($password, $user->getSalt());
+    }
+
+
+    /**
+     * Get the password encoder to use for the given user object.
+     *
+     * @param UserInterface $user
+     * @return PasswordEncoderInterface
+     */
+    protected function getEncoder(UserInterface $user)
+    {
+        return $this->app['security.encoder_factory']->getEncoder($user);
     }
 
     /**

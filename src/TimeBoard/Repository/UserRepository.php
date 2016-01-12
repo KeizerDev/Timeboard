@@ -13,7 +13,7 @@ class UserRepository
 
     public function __construct(Connection $connection)
     {
-        $this->connection = $connection;
+        $this->conn = $connection;
     }
 
 
@@ -60,7 +60,9 @@ class UserRepository
         $params = [
             'username' => $username
         ];
+
         $data = $this->conn->fetchAll($sql, $params);
+
         if($data) {
             $user = $this->hydrateUser($data[0]);
             return $user;
