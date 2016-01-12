@@ -2,6 +2,7 @@
 namespace TimeBoard\Repository;
 
 use Doctrine\DBAL\Connection;
+use Symfony\Component\Validator\Constraints\Date;
 use TimeBoard\Model\User;
 
 class UserRepository
@@ -9,7 +10,7 @@ class UserRepository
     /**
      * @var Connection
      */
-    private $conn;
+    public $conn;
 
     public function __construct(Connection $connection)
     {
@@ -120,10 +121,10 @@ class UserRepository
    /**
      * get the timeboard by date object
      *
-     * @param $date
+     * @param $dateOfBoard
      * @return null|Date
      */
-    public function getTimeboardOfDate($dateOfBoard)
+    public function getTimeBoardOfDate($dateOfBoard)
     {
         $sql = "SELECT * FROM accountability WHERE datum='$dateOfBoard'";
 

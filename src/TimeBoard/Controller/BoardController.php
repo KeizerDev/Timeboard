@@ -44,6 +44,6 @@ class BoardController {
     public function renderTimeBoardEdit($dateId)
     {
         $date = new \DateTime($dateId);
-        return $this->twig->render('Board/edit.html.twig',array('date' => array('date_today' => $date->format('d-m-Y'), 'date_prev' => Date("d-m-Y", strtotime("$dateId -1 Day")), 'date_next' => Date("d-m-Y", strtotime("$dateId +1 Day")), ), 'vakken' => $this->userManager->getUserRepository()->connection->fetchAll('SELECT * FROM vakken'), ));
+        return $this->twig->render('Board/edit.html.twig',array('date' => array('date_today' => $date->format('d-m-Y'), 'date_prev' => Date("d-m-Y", strtotime("$dateId -1 Day")), 'date_next' => Date("d-m-Y", strtotime("$dateId +1 Day")), ), 'vakken' => $this->userManager->getUserRepository()->conn->fetchAll('SELECT * FROM vakken'), ));
     }
 }

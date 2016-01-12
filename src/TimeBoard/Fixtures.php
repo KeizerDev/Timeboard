@@ -3,6 +3,7 @@
 namespace TimeBoard;
 
 use Symfony\Component\HttpFoundation\Response;
+use TimeBoard\Repository\TimeBoardRepository;
 use TimeBoard\Repository\UserRepository;
 
 /**
@@ -16,9 +17,15 @@ class Fixtures
      */
     private $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    /**
+     * @var TimeBoardRepository
+     */
+    private $timeBoardRepository;
+
+    public function __construct(UserRepository $userRepository, TimeBoardRepository $timeBoardRepository)
     {
         $this->userRepository = $userRepository;
+        $this->timeBoardRepository = $timeBoardRepository;
     }
 
 
@@ -28,6 +35,8 @@ class Fixtures
     public function createStructure()
     {
         $this->userRepository->createStructure();
+        $this->timeBoardRepository->createStructure();
+
         return new Response("DONE");
     }
 

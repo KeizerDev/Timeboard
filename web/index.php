@@ -4,6 +4,7 @@ use TimeBoard\Controller\BaseController;
 use TimeBoard\Controller\BoardController;
 use TimeBoard\Controller\SecurityController;
 use TimeBoard\Manager\UserManager;
+use TimeBoard\Repository\TimeBoardRepository;
 use TimeBoard\Repository\UserRepository;
 
 require_once __DIR__.'/../vendor/autoload.php';
@@ -60,6 +61,11 @@ $app['UserRepository'] = $app->share(function() use ($app) {
     return new UserRepository($app['db']);
 });
 
+$app['TimeBoardRepository'] = $app->share(function() use ($app) {
+    return new TimeBoardRepository($app['db']);
+});
+
+
 $app['BaseController'] = $app->share(function() use ($app) {
     return new BaseController($app['twig']);
 });
@@ -89,7 +95,7 @@ $app->get('/verantwoording/{dateId}/edit', 'BoardController:renderTimeBoardEdit'
 
 if($app['debug'] == true) {
     $app['Fixtures'] = $app->share(function() use ($app) {
-        return new \TimeBoard\Fixtures($app['UserRepository']);
+        return new \TimeBoard\Fixtures($app['UserRepository'], $app['TimeBoardRepository']);
     });
 
     $app->get('/setup', 'Fixtures:createStructure');
