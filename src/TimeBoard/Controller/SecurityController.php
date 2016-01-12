@@ -39,7 +39,7 @@ class SecurityController
     public function registerUser()
     {
         $user = $this->userManager->createUser([
-            'username' => 'root',
+            'username' => 'dennis',
             'password' => 'root'
         ]);
 

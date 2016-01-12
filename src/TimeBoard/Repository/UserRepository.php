@@ -117,4 +117,22 @@ class UserRepository
         $user->setId($this->conn->lastInsertId());
     }
 
+   /**
+     * get the timeboard by date object
+     *
+     * @param $date
+     * @return null|Date
+     */
+    public function getTimeboardOfDate($dateOfBoard)
+    {
+        $sql = "SELECT * FROM accountability WHERE datum='$dateOfBoard'";
+
+        $data = $this->conn->fetchAll($sql);
+
+        if($data) {
+            return $data;
+        }
+        return null;
+    }
+
 }

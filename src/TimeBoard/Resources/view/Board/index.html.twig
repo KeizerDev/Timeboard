@@ -18,16 +18,13 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 {% endblock cardmenu %}
 
 {% block tablebody %}
+    {% for item in accountability %}
     <tr>
-        <td>Nederlands</td>
-        <td class="mdl-data-table__cell--non-numeric">60</td>
-        <td>Lorem Ipsum</td>
+        <td>vak id: {{item.vak}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{item.minuten}}</td>
+        <td>{{item.notitie}}</td>
     </tr>
-    <tr>
-        <td>Engels</td>
-        <td class="mdl-data-table__cell--non-numeric">60</td>
-        <td>Lorem Ipsum</td>
-    </tr>
+    {% endfor %}
 {% endblock tablebody %}
 
 {#
