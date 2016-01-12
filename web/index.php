@@ -3,6 +3,7 @@
 use TimeBoard\Controller\BaseController;
 use TimeBoard\Controller\BoardController;
 use TimeBoard\Controller\SecurityController;
+use TimeBoard\Fixtures;
 use TimeBoard\Manager\TimeBoardManager;
 use TimeBoard\Manager\UserManager;
 use TimeBoard\Repository\TimeBoardRepository;
@@ -92,14 +93,15 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 $app->get('/', 'BaseController:renderMainPage');
 $app->get('/login', 'SecurityController:renderLoginPage');
-$app->get('/verantwoording/{dateId}', 'BoardController:renderTimeBoardIndex');
+$app->get('/verantwoording/{dateId}', 'BoardController:renderTimeBoardIndex')->bind('');
 $app->get('/verantwoording/{dateId}/edit', 'BoardController:renderTimeBoardEdit');
-
+$app->get('/verantwoording/{dateId}/new', 'BoardController:renderTimeBoardNew')->bind('newTimeBoard');
+$app->post('/verantwoording/{dateId}/new_post', 'BoardController:handleNewTimeBoard')->bind('newTimeBoard_post');
 
 
 if($app['debug'] == true) {
     $app['Fixtures'] = $app->share(function() use ($app) {
-        return new \TimeBoard\Fixtures($app['UserRepository'], $app['TimeBoardRepository']);
+        return new Fixtures($app['UserRepository'], $app['TimeBoardRepository']);
     });
 
     $app->get('/setup', 'Fixtures:createStructure');

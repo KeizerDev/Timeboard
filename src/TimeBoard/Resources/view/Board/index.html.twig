@@ -3,19 +3,12 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block description %}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 {% endblock description %}
 
 {% block cardmenu %}
     <a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" href="/verantwoording/{{date.date_today}}/edit">
         <i class="material-icons">edit</i>
     </a>
-
 {% endblock cardmenu %}
 
 {% block tablebody %}
@@ -27,6 +20,16 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </tr>
     {% endfor %}
 {% endblock tablebody %}
+
+{% block buttonholder %}
+    <div class="mdl-card mdl-shadow--2dp mdl-cell--1-col-desktop mdl-cell--2-col-tablet mdl-cell--12-col-phone mdl-button-holder">
+        <div class="mdl-card__actions mdl-card--border">
+            <a href="{{ app.url_generator.generate('newTimeBoard', { 'dateId' : date.date_today}) }}" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-float-left">
+                <i class="material-icons">add</i>
+            </a>
+        </div>
+    </div>
+{% endblock buttonholder %}
 
 {#
     periode, datum, aantal minuten, activiteit, betrokken lesvak, opmerking

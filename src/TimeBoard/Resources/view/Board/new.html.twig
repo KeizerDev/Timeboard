@@ -1,0 +1,66 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+            <div class="mdl-card mdl-table mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">{{date.date_today}}</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    {% block description %}{% endblock description %}
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-float-left" href="/verantwoording/{{date.date_prev}}{% block editroute %}{% endblock editroute %}">Vorige dag</a>
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-float-right" href="/verantwoording/{{date.date_next}}{{ block('editroute') }}">Volgende dag</a>
+                </div>
+                <div class="mdl-card__menu">
+                    {% block cardmenu %}{% endblock cardmenu %}
+                </div>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+           <form action="{{ app.url_generator.generate('newTimeBoard_post', { 'dateId' : date.date_today}) }}" method="post">
+            <table class="mdl-table mdl-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <thead>
+                <tr>
+                    <th>Vak</th>
+                    <th class="mdl-data-table__cell--non-numeric">Minuten</th>
+                    <th>Notitie</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="mdl-selectfield">
+                            <label>Standard Select</label>
+                            <select name="vak" class="browser-default">
+                                <option value="" disabled selected>Kies je vak</option>
+                                {% for vak in vakken %}
+                                    <option value="{{vak.getId()}}">{{vak.getCourseName()}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </td>
+                    <td class="mdl-data-table__cell--non-numeric">
+                        <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="number" name="minutes" id="pass">
+                    </td>
+                    <td>
+                        <input class="mdl-textfield__input mdl-textfield mdl-js-textfield" type="text" name="note" id="pass">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            {% block buttonholder %}
+                <div class="mdl-card mdl-shadow--2dp mdl-cell--1-col-desktop mdl-cell--1-col-tablet mdl-cell--1-col-phone mdl-button-holder">
+                    <div class="mdl-card__actions mdl-card--border">
+                        <button type="submit" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-float-right remove-field">
+                            <i class="material-icons">done</i>
+                        </button>
+                    </div>
+                </div>
+            {% endblock buttonholder %}
+            </form>
+        </div>
+    </div>
+{% endblock body %}

@@ -68,6 +68,7 @@ class TimeBoardRepository
     }
 
 
+
     public function getCourseByIdentifier($id)
     {
         $sql = "SELECT * FROM vakken WHERE id=:id";
@@ -121,6 +122,35 @@ class TimeBoardRepository
             return $timeBoardData;
         }
         return null;
+    }
+
+
+
+    public function insertNewTimeBoard(TimeBoard $board)
+    {
+        $sql = 'INSERT INTO accountability
+            (user_id
+            , vak
+            , minuten
+            , notitie
+            , datum)
+            VALUES
+            (:user_id
+            , :course
+            , :minutes
+            , :note
+            , :date )';
+
+        $params = array(
+            'user_id' => $board->getUser()->getId(),
+            'course' => $board->getCourse()->getId(),
+            'minutes' => $board->getMinutes(),
+            'note' => $board->getNote(),
+            'date' => $board->getDate()
+        );
+
+        $this->conn->executeUpdate($sql, $params);
+        $board->setId($this->conn->lastInsertId());
     }
 
 
