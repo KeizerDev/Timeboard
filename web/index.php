@@ -12,6 +12,8 @@ $app = new Silex\Application();
 $app['debug'] = true;
 
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+$app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
@@ -45,7 +47,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         array('^/login', 'IS_AUTHENTICATED_ANONYMOUSLY'),
         array('^/register', 'IS_AUTHENTICATED_ANONYMOUSLY'),
         array('^/setup', 'IS_AUTHENTICATED_ANONYMOUSLY'),
-        // array('^/', 'ROLE_USER'),
+         array('^/', 'ROLE_USER'),
     )
 ));
 
@@ -68,7 +70,7 @@ $app['BoardController'] = $app->share(function() use ($app) {
 
 
 $app['SecurityController'] = $app->share(function() use ($app) {
-    return new SecurityController($app['twig']);
+    return new SecurityController($app['twig'], $app['UserManager']);
 });
 
 
@@ -78,14 +80,14 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 
-
-$app->get('/login', 'SecurityController:renderLoginPage');
 $app->get('/', 'BaseController:renderMainPage');
+$app->get('/login', 'SecurityController:renderLoginPage');
 $app->get('/verantwoording/{dateId}', 'BoardController:renderTimeBoardIndex');
 $app->get('/verantwoording/{dateId}/edit', 'BoardController:renderTimeBoardEdit');
 
-if($app['debug'] == true) {
 
+
+if($app['debug'] == true) {
     $app['Fixtures'] = $app->share(function() use ($app) {
         return new \TimeBoard\Fixtures($app['UserRepository']);
     });

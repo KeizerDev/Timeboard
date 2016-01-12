@@ -2,7 +2,7 @@
 
 {% block title %}Dashboard{% endblock %}
 
-{% block blocktitle %}<a class="mdl-button" href="/logout" id="username"><b>Robert-Jan</b></a>{% endblock blocktitle %}
+{% block blocktitle %}<a class="mdl-button" href="{{ app.url_generator.generate('logout') }}" id="username"><b>{{ app.user.getUsername() }}</b></a>{% endblock blocktitle %}
 
 {% block description %}
 
