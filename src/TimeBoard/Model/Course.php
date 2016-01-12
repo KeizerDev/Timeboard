@@ -13,11 +13,10 @@ class Course
 
 
     /**
-     *
      * Course name
      * @var String
      */
-    protected $vak;
+    protected $courseName;
 
     /**
      * @return INT
@@ -34,21 +33,20 @@ class Course
     {
         $this->id = $id;
     }
-
     /**
      * @return String
      */
-    public function getVak()
+    public function getCourseName()
     {
-        return $this->vak;
+        return $this->courseName;
     }
 
     /**
-     * @param String $vak
+     * @param String $courseName
      */
-    public function setVak($vak)
+    public function setCourseName($courseName)
     {
-        $this->vak = $vak;
+        $this->courseName = $courseName;
     }
 
 }

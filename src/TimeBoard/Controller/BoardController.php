@@ -1,9 +1,10 @@
 <?php
 namespace TimeBoard\Controller;
 
-// use \DateTime as SQLite3;
 use Symfony\Component\HttpFoundation\Response;
+use TimeBoard\Manager\TimeBoardManager;
 use TimeBoard\Manager\UserManager;
+use TimeBoard\Repository\TimeBoardRepository;
 use Twig_Environment;
 
 /**
@@ -23,22 +24,32 @@ class BoardController {
     private $twig;
 
     /**
+     * @var TimeBoardManager
+     */
+    private $boardManager;
+
+    /**
      * BoardController constructor.
      * @param UserManager $userManager
+     * @param TimeBoardManager $boardManager
      * @param Twig_Environment $twig
      */
-    public function __construct(UserManager $userManager, Twig_Environment $twig)
+    public function __construct(UserManager $userManager, TimeBoardManager $boardManager, Twig_Environment $twig)
     {
         $this->userManager = $userManager;
         $this->twig = $twig;
+        $this->boardManager = $boardManager;
     }
 
 
     public function renderTimeBoardIndex($dateId)
     {
         $date = new \DateTime($dateId);
-        // return print_r($this->userManager->getUserRepository()->getTimeboardOfDate($date->format('d-m-Y')));    
-        return $this->twig->render('Board/index.html.twig', array('date' => array('date_today' => $date->format('d-m-Y'), 'date_prev' => Date("d-m-Y", strtotime("$dateId -1 Day")), 'date_next' => Date("d-m-Y", strtotime("$dateId +1 Day")), ), 'accountability' => $this->userManager->getUserRepository()->getTimeboardOfDate($date->format('d-m-Y')), ));
+
+             return $this->twig->render('Board/index.html.twig', [
+            'date' => array('date_today' => $date->format('d-m-Y'), 'date_prev' => Date("d-m-Y", strtotime("$dateId -1 Day")), 'date_next' => Date("d-m-Y", strtotime("$dateId +1 Day")), ),
+            'accountability' => $this->boardManager->getTimeBoardRepository()->getTimeboardOfDate($date->format('d-m-Y'))]
+            );
     }
 
     public function renderTimeBoardEdit($dateId)

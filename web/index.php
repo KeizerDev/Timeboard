@@ -3,6 +3,7 @@
 use TimeBoard\Controller\BaseController;
 use TimeBoard\Controller\BoardController;
 use TimeBoard\Controller\SecurityController;
+use TimeBoard\Manager\TimeBoardManager;
 use TimeBoard\Manager\UserManager;
 use TimeBoard\Repository\TimeBoardRepository;
 use TimeBoard\Repository\UserRepository;
@@ -57,6 +58,10 @@ $app['UserManager'] = $app->share(function() use ($app) {
     return new UserManager($app['UserRepository'], $app);
 });
 
+$app['TimeBoardManager'] = $app->share(function() use ($app) {
+    return new TimeBoardManager($app['TimeBoardRepository']);
+});
+
 $app['UserRepository'] = $app->share(function() use ($app) {
     return new UserRepository($app['db']);
 });
@@ -65,13 +70,12 @@ $app['TimeBoardRepository'] = $app->share(function() use ($app) {
     return new TimeBoardRepository($app['db']);
 });
 
-
 $app['BaseController'] = $app->share(function() use ($app) {
     return new BaseController($app['twig']);
 });
 
 $app['BoardController'] = $app->share(function() use ($app) {
-    return new BoardController($app['UserManager'], $app['twig']);
+    return new BoardController($app['UserManager'], $app['TimeBoardManager'], $app['twig']);
 });
 
 
